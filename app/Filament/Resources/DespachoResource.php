@@ -23,6 +23,10 @@ use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Filters\SelectFilter;
 
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\IconColumn;
+use Illuminate\Support\Facades\Storage;
+
 class DespachoResource extends Resource
 {
     protected static ?string $model = Despacho::class;
@@ -124,8 +128,17 @@ class DespachoResource extends Resource
                     ->required(),
 
                 Textarea::make('novedad_factura')->label('Novedad en Factura')
-                    ->rows(3)
+                    ->rows(6),
+                    //->columnSpanFull(),
                     //->disabled(!$isAdmin),
+                FileUpload::make('adjunto')
+                    ->label('Adjuntar archivo')
+                    ->disk('public') // Asegúrate que el disco esté configurado
+                    ->directory('adjuntos-despachos')
+                    ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png'])
+                    ->enableDownload()
+                    ->enableOpen()
+                    //->columnSpanFull(),
             ]);
     }
 

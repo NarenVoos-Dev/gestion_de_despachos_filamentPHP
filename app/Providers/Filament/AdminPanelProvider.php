@@ -41,8 +41,11 @@ class AdminPanelProvider extends PanelProvider
             ->darkMode(true, true)
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\TotalDatosBase::class,
+                \App\Filament\Widgets\DespachosChart::class,
+                \App\Filament\Widgets\UltimosDespachos::class,
+                \App\Filament\Widgets\DespachosPorEstado::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -29,6 +29,7 @@ class Despacho extends Model
         'valor_unitario',
         'valor_total',
         'mes',
+        'adjunto',
         'estado',
         'novedad_factura',
         'creado_por',

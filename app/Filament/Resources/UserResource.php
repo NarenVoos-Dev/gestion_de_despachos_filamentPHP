@@ -26,7 +26,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'admin';
+        return 'Admin';
     }
 
     public static function form(Form $form): Form
