@@ -45,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Widgets\DespachosChart::class,
                 \App\Filament\Widgets\UltimosDespachos::class,
                 \App\Filament\Widgets\DespachosPorEstado::class,
+                \App\Filament\Widgets\DespachosPorProducto::class,
 
             ])
             ->middleware([
