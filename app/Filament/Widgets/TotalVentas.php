@@ -9,11 +9,13 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-class DespachosPorProducto extends TableWidget
+class TotalVentas extends TableWidget
 {
-    protected static ?string $heading = 'Despachos Agrupados por Producto';
+    protected static ?string $heading = 'Total de ventas por Producto';
     //protected static ?int $columnSpan = 'full';
+     protected int | string | array $columnSpan = 1;
 
     public $fecha_inicio;
     public $fecha_fin;
@@ -69,6 +71,29 @@ class DespachosPorProducto extends TableWidget
                     $this->fecha_fin = $data['fecha_fin'];
                     $this->estados_seleccionados = $data['estados_seleccionados'];
                     $this->dispatch('refresh'); // Cambiado de emitSelf a dispatch
+                }),
+
+                Tables\Actions\Action::make('Exportar PDF')
+                ->color('danger')
+                ->icon('heroicon-o-printer')
+                ->action(function () {
+                    $data = $this->getTableQuery()->get();
+                    $filtros = [
+                        'fecha_inicio' => $this->fecha_inicio,
+                        'fecha_fin' => $this->fecha_fin,
+                        'estados' => $this->estados_seleccionados
+                    ];
+                    
+                    $pdf = Pdf::loadView('pdf.despachos', [
+                        'data' => $data,
+                        'filtros' => $filtros,
+                        'title' => 'Reporte de Ventas por Producto'
+                    ]);
+                    
+                    return response()->streamDownload(
+                        fn () => print($pdf->output()),
+                        'ventas_por_producto_'.now()->format('Y-m-d').'.pdf'
+                    );
                 })
         ];
     }
@@ -107,4 +132,5 @@ class DespachosPorProducto extends TableWidget
     {
         return [10, 25, 50, 100];
     }
+
 }

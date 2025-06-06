@@ -18,7 +18,7 @@ class DespachosChart extends ChartWidget
     protected static bool $hasForm = true;
 
     public ?array $data = [];
-     protected int | string | array $columnSpan = 2;
+     protected int | string | array $columnSpan = 1;
     protected function getForm(): Form
     {
         return Forms\Form::make()
@@ -60,9 +60,5 @@ class DespachosChart extends ChartWidget
     protected function getType(): string
     {
         return 'bar';
-    }
-    protected function getColumns(): int
-    {
-        return 2; // Muestra ambos stats en una fila
     }
 }

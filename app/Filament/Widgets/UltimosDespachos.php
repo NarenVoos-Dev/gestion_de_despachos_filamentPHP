@@ -11,7 +11,7 @@ class UltimosDespachos extends BaseWidget
 {
     protected static ?string $heading = 'Últimos Despachos Creados';
     protected static bool $isLazy = false;
-    protected int | string | array $columnSpan = 2;
+    protected int | string | array $columnSpan = 1;
     protected int $limite = 5; // Puedes cambiar 10 por 5 o 20 si lo deseas
 
     protected function getTableQuery(): Builder
@@ -72,7 +72,7 @@ class UltimosDespachos extends BaseWidget
 
     protected function getColumns(): int
     {
-        return 2; // Muestra ambos stats en una fila
+        return 1; // Muestra ambos stats en una fila
     }
 
 }
