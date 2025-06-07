@@ -34,7 +34,8 @@ class TotalVentas extends TableWidget
             ->when($this->fecha_inicio, fn($q) => $q->whereDate('fecha', '>=', Carbon::parse($this->fecha_inicio)))
             ->when($this->fecha_fin, fn($q) => $q->whereDate('fecha', '<=', Carbon::parse($this->fecha_fin)))
             ->when($this->estados_seleccionados, fn($q) => $q->whereIn('estado', $this->estados_seleccionados))
-            ->groupBy('producto_id', 'productos.nombre');
+            ->groupBy('producto_id', 'productos.nombre')
+            ->orderBy('productos.nombre');
     }
 
     public function getTableRecordKey(\Illuminate\Database\Eloquent\Model $record): string
