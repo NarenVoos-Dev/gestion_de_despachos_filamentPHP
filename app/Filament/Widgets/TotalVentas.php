@@ -104,7 +104,6 @@ class TotalVentas extends TableWidget
         return [
             Tables\Columns\TextColumn::make('producto_nombre')
                 ->label('Producto')
-                ->searchable()
                 ->sortable(),
                 
             Tables\Columns\TextColumn::make('total_cantidad')
